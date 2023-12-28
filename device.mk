@@ -21,36 +21,6 @@ $(call inherit-product, device/sony/kitakami-common/device-common.mk)
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/sony/suzuran/suzuran-vendor.mk)
 
-# AuroraServices
-$(call inherit-product-if-exists, vendor/AuroraServices/AuroraServices-vendor.mk)
-
-# AuroraServices permissions
-PRODUCT_PACKAGES += \
-		permissions_com.aurora.services.xml
-		
-# FDroid
-$(call inherit-product-if-exists, vendor/fdroid/fdroid-vendor.mk)
-
-# FDroid permissions
-PRODUCT_PACKAGES += \
-    privapp_whitelist_org.fdroid.fdroid.privileged.xml
-
-# Since microG and GApps can't coexist, you NEED to choose whether you build for microG OR GApps.
-# Set "export WITH_MICROG="true"" to build for microG OR "export WITH_MICROG="false"" to build for GApps.
-# This can be done i.e. in your build script.
-
-ifeq ($(WITH_MICROG),true)
-
-# microG
-$(call inherit-product-if-exists, vendor/microG/microG-vendor.mk)
-
-# microG permissions
-PRODUCT_PACKAGES += \
-		privapp-permissions-com.android.vending.xml \
-		privapp-permissions-com.google.android.gms.xml
-
-endif
-
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
